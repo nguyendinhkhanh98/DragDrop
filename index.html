@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Static HTML Page</title>
+    <!-- Tải Tailwind CSS từ CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- Thêm phần tử có id "app" vào body -->
+    <div id="app">
+      <div
+      id="clone" ref="clone"
+      class="clone hidden"
+      :style="{ left: cloneStyle.left, top: cloneStyle.top }"
+    >
+    <div  class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" style="width: 200px; height: 400px;transform: scale(0.8);">
+      <a href="#">
+          <img class="rounded-t-lg" :src="clonedItem?.img" alt="" />
+      </a>
+      <div class="p-5">
+          <a href="#">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{clonedItem?.title}}</h5>
+          </a>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{clonedItem?.des}}</p>
+        </div>
+       </div>
+    </div>
+    <div class="products flex justify-start gap-1">
+      <div
+        v-for="(itemProd, key) in products"
+        :key="key"
+        class="max-w-sm pro bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+        style="position: relative;width: 200px; height: 400px;"
+      >
+        <!-- Phần tử bên dưới -->
+        <div class="max-w-sm pro bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 user-select-none" :id="`product-${key}`"
+        :style="{ width: '200px', height: '400px', position: itemProd.isDragging ? 'fixed' : 'static', left: itemProd.x + 'px', top: itemProd.y + 'px', 'z-index':100000 }"
+        @mousedown="handleMouseDown(key, $event)"
+        @mousemove="handleMouseMove($event)"
+        @mouseup="handleMouseUp(key, $event)"
+        draggable="false"
+        >
+           <div class="relative">
+            <img class="user-select-none" :src="itemProd?.img" alt=""/>
+            <div class="absolute bg-transparent top-0 z-50" style="width: 200px; height: 131px;" ></div>
+            </div>
+           
+            <div
+            class="card-body user-select-none"
+            style="margin-top: -10px; z-index: 20; position: relative"
+          >
+            <div class="info user-select-none flex justify-between">
+              <div class="flex flex-col user-select-none">
+                <div class="flex items-center items-start">
+                  <img
+                    src="chip.jpg"
+                    style="width: 10px; height: 10px"
+                  />
+                  <span class="user-select-none" style="font-size: 12px">Desktop Recorder</span>
+                </div>
+                <h5>{{itemProd.title}}</h5>
+              </div>
+              <span class="text-black user-select-none"   @mousedown="handleMouseDown(key, $event)"
+              @mousemove="handleMouseMove($event)"
+              @mouseup="handleMouseUp(key, $event)"
+              draggable="false" >intel</span>
+            </div>
+            <div class="flex justify-between mt-2 gap-1">
+              <div
+                class="flex flex-col user-select-none"
+                style="
+                  background-color: #ff884b;
+                  width: 50%;
+                  border-radius: 5px;
+                  padding: 5px;
+                "
+              >
+                <span class="user-select-none" style="font-size: 12px; color: white">chip</span>
+                <span class="user-select-none" style="font-size: 14px; color: white"
+                  >NBLN0718</span
+                >
+              </div>
+              <div
+                class="flex flex-col user-select-none"
+                style="
+                  background-color: #ff884b;
+                  width: 50%;
+                  border-radius: 5px;
+                  padding: 5px;
+                "
+              >
+                <span class="user-select-none" style="font-size: 12px; color: white">chip</span>
+                <span class="user-select-none" style="font-size: 14px; color: white"
+                  >NBLN0718</span
+                >
+              </div>
+            </div>
+            <div class="flex justify-between mt-2 gap-1 user-select-none">
+              <div
+                class="flex flex-col"
+                style="
+                  background-color: #ff884b;
+                  width: 50%;
+                  border-radius: 5px;
+                  padding: 5px;
+                "
+              >
+                <span class="user-select-none" style="font-size: 12px; color: white">chip</span>
+                <span class="user-select-none" style="font-size: 14px; color: white"
+                  >NBLN0718</span
+                >
+              </div>
+              <div
+                class="flex flex-col"
+                style="
+                  background-color: #ff884b;
+                  width: 50%;
+                  border-radius: 5px;
+                  padding: 5px;
+                "
+              >
+                <span class="user-select-none" style="font-size: 12px; color: white">chip</span>
+                <span class="user-select-none" style="font-size: 14px; color: white"
+                  >NBLN0718</span
+                >
+              </div>
+            </div>
+            <div class="user-select-none flex justify-between mt-2 gap-1">
+              <div
+                class="flex flex-col"
+                style="
+                  background-color: #ff884b;
+                  width: 50%;
+                  border-radius: 5px;
+                  padding: 5px;
+                "
+              >
+                <span class="user-select-none" style="font-size: 12px; color: white">chip</span>
+                <span class="user-select-none" style="font-size: 14px; color: white"
+                  >NBLN0718</span
+                >
+              </div>
+              <div
+                class="flex flex-col"
+                style="
+                  background-color: #ff884b;
+                  width: 50%;
+                  border-radius: 5px;
+                  padding: 5px;
+                "
+              >
+                <span class="user-select-none" style="font-size: 12px; color: white">chip</span>
+                <span class="user-select-none" style="font-size: 14px; color: white"
+                  >NBLN0718</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Phần tử có z-index cao hơn -->
+        <div :id="`prod-${key}`"
+          class="max-w-sm pro bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hidden"
+          style="width: 200px; height: 400px; position: absolute; top: 0; left: 0; opacity: 0.5; z-index: 1;"
+        >
+          <a href="#">
+            <img class="rounded-t-lg" :src="itemProd?.img" alt="" />
+          </a>
+          <div class="p-5">
+            <a href="#">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{itemProd?.title}}</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{itemProd?.des}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+ 
+
+     
+      <div
+        class="fixed flex w-full h-[200px] bottom-0 justify-between"
+        style="height: 200px; background: hsl(206.67deg 5.2% 33.92%)"
+      >
+        <div tyle="position: relative;width: 100%; min-width: 300px">
+          <div
+            class="stack-list"
+            style="margin-top: -50px; margin-left: 40px"
+            v-if="listItem.length > 0"
+          >
+            <div
+              v-for="(item, index) in listItem"
+              :key="index"
+              class="stack-item"
+              :style="getItemStyles(index)"
+            >
+              {{ item }}
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <div style="position: absolute; bottom: 40px">
+            <div class="stacked-cards">
+              <div
+                v-for="(item, index) in stackItem.slice(0,5)"
+                :id="`stack-${index}`"
+                :class="`card card-bottom-left drag-stack`"
+                :style="{ transform: 'scale(' + calculateScale(index) + ')', left: calculateLeft(index), bottom: calculateBottom(index), zIndex: stackItem.length - index }"
+                @dragover="onDragOver($event, index)"
+                @drop="onDrop($event, index)"
+              >
+                <div class="card-inner">
+                  <div style="z-index: 10">
+                    <img
+                      :src="item.img"
+                      style="width: 100%; height: 238px; border-radius: 5px"
+                    />
+                  </div>
+                  <div
+                    class="card-body"
+                    style="margin-top: -10px; z-index: 20; position: relative"
+                  >
+                    <div class="info flex justify-between">
+                      <div class="flex flex-col">
+                        <div class="flex items-center items-start">
+                          <img
+                            src="chip.jpg"
+                            style="width: 10px; height: 10px"
+                          />
+                          <span style="font-size: 12px">Desktop Recorder</span>
+                        </div>
+                        <h5>{{item.name}}</h5>
+                      </div>
+                      <span class="text-black">intel</span>
+                    </div>
+                    <div class="flex justify-between mt-2 gap-1">
+                      <div
+                        class="flex flex-col"
+                        style="
+                          background-color: #ff884b;
+                          width: 50%;
+                          border-radius: 5px;
+                          padding: 5px;
+                        "
+                      >
+                        <span style="font-size: 12px; color: white">chip</span>
+                        <span style="font-size: 14px; color: white"
+                          >NBLN0718</span
+                        >
+                      </div>
+                      <div
+                        class="flex flex-col"
+                        style="
+                          background-color: #ff884b;
+                          width: 50%;
+                          border-radius: 5px;
+                          padding: 5px;
+                        "
+                      >
+                        <span style="font-size: 12px; color: white">chip</span>
+                        <span style="font-size: 14px; color: white"
+                          >NBLN0718</span
+                        >
+                      </div>
+                    </div>
+                    <div class="flex justify-between mt-2 gap-1">
+                      <div
+                        class="flex flex-col"
+                        style="
+                          background-color: #ff884b;
+                          width: 50%;
+                          border-radius: 5px;
+                          padding: 5px;
+                        "
+                      >
+                        <span style="font-size: 12px; color: white">chip</span>
+                        <span style="font-size: 14px; color: white"
+                          >NBLN0718</span
+                        >
+                      </div>
+                      <div
+                        class="flex flex-col"
+                        style="
+                          background-color: #ff884b;
+                          width: 50%;
+                          border-radius: 5px;
+                          padding: 5px;
+                        "
+                      >
+                        <span style="font-size: 12px; color: white">chip</span>
+                        <span style="font-size: 14px; color: white"
+                          >NBLN0718</span
+                        >
+                      </div>
+                    </div>
+                    <div class="flex justify-between mt-2 gap-1">
+                      <div
+                        class="flex flex-col"
+                        style="
+                          background-color: #ff884b;
+                          width: 50%;
+                          border-radius: 5px;
+                          padding: 5px;
+                        "
+                      >
+                        <span style="font-size: 12px; color: white">chip</span>
+                        <span style="font-size: 14px; color: white"
+                          >NBLN0718</span
+                        >
+                      </div>
+                      <div
+                        class="flex flex-col"
+                        style="
+                          background-color: #ff884b;
+                          width: 50%;
+                          border-radius: 5px;
+                          padding: 5px;
+                        "
+                      >
+                        <span style="font-size: 12px; color: white">chip</span>
+                        <span style="font-size: 14px; color: white"
+                          >NBLN0718</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add more cards as needed -->
+            </div>
+          </div>
+          <div class="flex gap-2 justify-center items-center" style="margin-left: 98px;">
+            <i class="fa-regular fa-star" style="color: #ffffff"></i>
+            <i class="fa-solid fa-circle-down" style="color: #ffffff"></i>
+            <i class="fa-solid fa-grip-vertical" style="color: #ffffff"></i>
+            <i class="fa-solid fa-circle-info" style="color: #fff;"></i>
+            <i class="fa-solid fa-ellipsis-vertical" style="color: #ffffff;"></i>
+          </div>
+        </div>
+        <div
+          style="
+            position: relative;
+            display: block;
+            margin-top: -107px;
+            margin-right: 20px;
+          "
+          id="droppable-area"
+        >
+        <div class="drop-box">
+          <i class="fa-solid fa-plus"></i>
+          <span>Drag and Drop for New Stack</span>
+          <div class="image-container">
+            <img src="man.jpg" />
+          </div>
+        </div>
+        </div>
+        <div v-if="isShowModal" class="modal-overlay">
+          <div class="modal-container">
+            <div class="modal-content">
+              <div class="form-container">
+                <h1>Add stack</h1>
+                <label for="name">Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="name stack"
+                  v-model="nameStack"
+                />
+                <div v-if="error" style="color: red">Name is required</div>
+                <button type="submit" @click="addStack">Add</button>
+                <button type="submit" @click="closeModal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue.js!",
+          isShowModal: false,
+          itemSelect: null,
+          listItem: ["stack 1"],
+          nameStack: "",
+          error: false,
+          spacingLeft: 40,
+          spacingBottom: 5,
+          baseScale: 0.7,
+          draggingIndex: -1,
+        initialOffset: { x: 0, y: 0 },
+          products: [
+            {
+              img: 'lappc.jpg',
+              title: 'laptop dell',
+              des: 'Here are the biggest enterprise technology acquisitions of 2021 so far.',
+              x: 0, y: 0, isDragging: false
+            },
+            {
+              img: 'pc.jpg',
+              title: 'laptop hp',
+              des: 'Here are the biggest enterprise technology acquisitions of 2022 so far.',
+              x: 0, y: 0, isDragging: false
+            }
+          ],
+          stackItem: [
+            {
+              img: "laptop.jpg",
+              name: "laptop intel core i5",
+            },
+            {
+              img: "lapmobile.jpg",
+              name: "laptop intel core i7",
+            },
+         
+          ],
+          dragItem: null,
+          dragging: false,
+        selectedItem: null,
+        clonedItem: null,
+        cloneStyle: {
+          left: '0px',
+          top: '0px'
+        }
+        },
+        mounted() {
+          let draggedItem = null;
+          console.log("Vue instance đã được mounted!");
+
+         
+        },
+        methods: {
+   handleMouseDown(index, event) {
+  this.draggingIndex = index;
+  const rect = document.getElementById(`product-${index}`).getBoundingClientRect();
+  document.getElementById(`stack-0`).classList.add('active');
+  document.getElementById(`product-${index}`).classList.add('test');
+  document.getElementById(`prod-${index}`).classList.remove('hidden');
+  document.querySelector('.drop-box').classList.add('action');
+  this.products[index].x = rect.left;
+  this.products[index].y = rect.top;
+  this.initialOffset.x = event.clientX - rect.left;
+  this.initialOffset.y = event.clientY - rect.top;
+  this.products[index].isDragging = true;
+
+  document.addEventListener('mousemove', this.handleMouseMove);
+  document.addEventListener('mouseup', this.handleMouseUp);
+},
+      handleMouseMove(event) {
+    if (this.draggingIndex !== -1) {
+      this.products[this.draggingIndex].x = event.clientX - this.initialOffset.x;
+      this.products[this.draggingIndex].y = event.clientY - this.initialOffset.y;
+
+      if (event.clientX === 0 || event.clientY === 0) {
+        this.handleMouseUp();
+      }
+    }
+  },
+        handleMouseUp(index, event) {
+          console.log('vao')
+          document.getElementById(`product-${index}`).classList.remove('test')
+          document.querySelector('.drop-box').classList.remove('action')
+
+          if (this.draggingIndex !== -1) {
+            this.products[this.draggingIndex].isDragging = false;
+            document.getElementById(`prod-${this.draggingIndex}`).classList.add('hidden')
+            const droppableArea = document.getElementById("droppable-area");
+           const drop =  document.querySelector('.drop-box').getBoundingClientRect()
+           const dropSTACK  =  document.getElementById(`stack-0`).getBoundingClientRect();
+           if (
+                event.clientX >= drop.left &&
+                event.clientX <= drop.right &&
+                event.clientY >= drop.top &&
+                event.clientY <= drop.bottom
+              ) {
+                this.isShowModal = true;
+              }
+           
+           else if (
+                event.clientX >= dropSTACK.left &&
+                event.clientX <= dropSTACK.right &&
+                event.clientY >= dropSTACK.top &&
+                event.clientY <= dropSTACK.bottom
+              ) {
+                this.stackItem.unshift({
+              img: this.products[index].img,
+              name: this.products[index].title,
+            });
+                this.$nextTick(()=>{
+                  document.getElementById(`stack-0`).classList.remove('active')
+
+                })
+              
+              } else {
+                document.getElementById(`stack-0`).classList.remove('active')
+              }
+              this.draggingIndex = -1;
+
+          } else {
+            document.getElementById(`stack-0`).classList.remove('active')
+
+          }
+		  
+    document.removeEventListener('mousemove', this.handleMouseMove);
+    document.removeEventListener('mouseup', this.handleMouseUp);
+        },
+        //   startDragging(item, event) {
+        //   this.selectedItem = event.target;
+        //   this.selectedItem.classList.add('test')
+        //   this.clonedItem = { ...item };
+        //   this.dragging = true;
+        //   document.body.classList.add('test');
+        //   this.cloneStyle.left = `${event.clientX}px`;
+        //   this.cloneStyle.top = `${event.clientY}px`;
+
+        //   const handleMouseMove = (event) => {
+        //     if (this.dragging) {
+        //       this.cloneStyle.left = `${event.clientX}px`;
+        //       this.cloneStyle.top = `${event.clientY}px`;
+        //     }
+        //   };
+
+        //   const handleMouseUp = () => {
+        //     if (this.dragging) {
+        //       this.dragging = false;
+        //       this.selectedItem = null;
+        //       this.clonedItem = null;
+        //       document.body.classList.remove('test');
+
+        //       if (this.isHovering) {
+        //         this.items.push({ id: Date.now(), text: this.clonedItem.text });
+        //       }
+
+        //       this.isHovering = false;
+
+        //       document.removeEventListener('mousemove', handleMouseMove);
+        //       document.removeEventListener('mouseup', handleMouseUp);
+        //     }
+        //   };
+
+        //   document.addEventListener('mousemove', handleMouseMove);
+        //   document.addEventListener('mouseup', handleMouseUp);
+        // },
+        // handleDrop(event) {
+        //   const dropRect = this.$refs.dropable.getBoundingClientRect();
+        //   if (
+        //     event.clientX >= dropRect.left &&
+        //     event.clientX <= dropRect.right &&
+        //     event.clientY >= dropRect.top &&
+        //     event.clientY <= dropRect.bottom
+        //   ) {
+        //     this.isHovering = true;
+        //   } else {
+        //     this.isHovering = false;
+        //   }
+        // },
+          onDragOver(event, index) {
+            event.preventDefault();
+          },
+          onDrop(event, index) {
+            console.log(this.dragItem.dataset.name)
+            this.stackItem.unshift({
+              img: "laptop.jpg",
+              name: this.dragItem.dataset.name,
+            });
+            console.log(this.stackItem)
+          },
+          updateMessage() {
+            this.message = "Message đã được cập nhật!";
+          },
+          getItemStyles(index) {
+            const zIndex = this.listItem.length - index;
+            const rotateX = 10 - index * 2 + "deg";
+            const translateY = index * 20 + "px";
+            const translateZ = -index * 30 + "px";
+            const rotateY = "15deg"; // Góc xoay nhẹ ở trên (phương thẳng đứng)
+
+            return {
+              zIndex: zIndex,
+              transform: `rotateX(${rotateX}) translateY(${translateY}) translateZ(${translateZ}) rotateY(${rotateY})`,
+            };
+          },
+          calculateLeft(index) {
+            return index * this.spacingLeft - (index * 0.1) + "px";
+          },
+          calculateBottom(index) {
+            if (index === 0) {
+              return this.spacingBottom + "px";
+            }
+            return (
+              (this.stackItem.length - index - 1) * this.spacingBottom + "px"
+            );
+          },
+          calculateScale(index) {
+            if (index === 0) {
+              return this.baseScale; // Giữ nguyên scale cho phần tử đầu tiên
+            } else {
+              return this.baseScale - index * 0.1; // Giảm scale cho các phần tử sau
+            }
+          },
+          calculateZIndex(index) {
+            return this.stackItem.length - index;
+          },
+          addStack() {
+            this.error = false;
+            if (this.nameStack === "") {
+              this.error = true;
+              return;
+            }
+            this.listItem.push(this.nameStack);
+            this.listItem = this.listItem.reverse();
+            console.log(this.listItem);
+            this.isShowModal = false;
+            this.nameStack = "";
+          },
+          closeModal() {
+            this.isShowModal = false;
+            this.nameStack = "";
+          },
+        },
+      });
+    </script>
+  </body>
+  <style>
+ .drop-area {
+  position: relative;
+  display: block;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.drop-box {
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff8a00, #e52e71);
+  width: 180px;
+  height: 260px;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+  position: relative;
+}
+
+.drop-box.action {
+  background: linear-gradient(135deg, #e52e71, #ff8a00);
+  transform: translateY(-5px);
+}
+
+.drop-box i {
+  font-size: 24px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.drop-box span {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.image-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(50%, 50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+}
+
+    .pro:hover{
+      cursor: grab;
+    }
+    .pro.test{
+      cursor: grabbing;
+    }
+      body.test {
+      cursor: grabbing;
+    }
+    /* CSS của bạn */
+    .products {
+      padding: 20px;
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    .products .product {
+      position: relative;
+      overflow: hidden;
+      width: 300px;
+      height: 380px;
+      text-align: left;
+      display: inline-block;
+      background-color: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      padding: 20px;
+    }
+
+    .products .product img {
+      position: relative;
+      top: -5px;
+      margin: auto;
+      transition: all 0.2s ease;
+      width: 100%;
+      -webkit-clip-path: polygon(0 100%, 0 0, 100% 0, 100% 70%);
+      clip-path: polygon(0 100%, 0 0, 100% 0, 100% 70%);
+    }
+    .products .product img:hover {
+      -webkit-clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+      clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+
+    .products .product h1 {
+      line-height: 20px;
+      font-size: 20px;
+      margin-top: 15px;
+    }
+    .user-select-none {
+  user-select: none;
+}
+    .products .product .price {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 25px;
+      color: darkblue;
+      background: lightblue;
+      border: 1px solid blue;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    @-webkit-keyframes Gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @-moz-keyframes Gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes Gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    .clone {
+      position: fixed;
+      pointer-events: none;
+      opacity: 1;
+      z-index: 9999999999999999999;
+      display: none;
+    }
+    /* CSS của modal */
+    .modal-overlay {
+      /* CSS cũ cho .modal-overlay */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999; /* Thiết lập z-index cao để modal nằm trên cùng */
+    }
+
+    .modal-container {
+      /* CSS cũ cho .modal-container */
+      background-color: #333;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      z-index: 10000; /* Thiết lập z-index cao hơn nữa cho .modal-container */
+    }
+
+    .modal-content {
+      /* Nếu muốn tuỳ chỉnh kiểu dáng của nội dung modal */
+    }
+
+    .btn-close {
+      /* Nếu muốn tuỳ chỉnh kiểu dáng của nút đóng modal */
+    }
+    #app {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
+
+    .stacked-cards {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+
+    .card {
+      position: absolute;
+      background-color: #ffffff;
+      border: 1px solid #e2d9d5;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      transition: transform 1s;
+      cursor: grab;
+    }
+
+    /* .card.card-bottom-left:nth-child(1) {
+      left: 0;
+      bottom: 100px;
+      z-index: 3;
+    }
+
+    .card.card-bottom-left:nth-child(2) {
+      left: 90px;
+      bottom: 105px;
+      z-index: 2;
+    }
+
+    .card.card-bottom-left:nth-child(3) {
+      bottom: 115px;
+      left: 133px;
+      z-index: 1;
+    } */
+
+    .card-body {
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 10px;
+    }
+
+    .card:hover {
+      transform: translate(16px, 16px);
+    }
+    .form-container {
+      padding: 20px;
+      background-color: #333; /* Dark form background color */
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      font-size: 16px;
+      margin-top: 10px;
+      color: #bbb; /* Label color for dark mode */
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #555; /* Border color for dark mode */
+      border-radius: 5px;
+      margin-top: 5px;
+      background-color: #444; /* Input background color for dark mode */
+      color: #f2f2f2; /* Text color for dark mode */
+      box-sizing: border-box;
+      font-famaily: sans-serif;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      display: none;
+    }
+
+    .checkbox-label,
+    .radio-label {
+      position: relative;
+      cursor: pointer;
+      padding-left: 25px;
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #666; /* Border color for dark mode */
+      border-radius: 3px;
+    }
+
+    input[type="checkbox"]:checked + .checkmark,
+    input[type="radio"]:checked + .checkmark {
+      background-color: #007aff;
+      border: 2px solid #007aff;
+    }
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    input[type="checkbox"]:checked + .checkmark:after,
+    input[type="radio"]:checked + .checkmark:after {
+      display: block;
+    }
+
+    input[type="checkbox"]:checked + .checkmark:after {
+      left: 6px;
+      top: 2px;
+      width: 4px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    input[type="radio"]:checked + .checkmark:after {
+      left: 5px;
+      top: 5px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: white;
+    }
+
+    button {
+      background-color: #007aff; /* Button background color for dark mode */
+      color: #f2f2f2; /* Text color for dark mode */
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3; /* Button background color for dark mode on hover */
+    }
+    .stack-list {
+      position: relative;
+      width: 300px;
+      height: 400px;
+    }
+    .card.active {
+  transform: scale(0.9)!important; /* Tăng kích thước khi kéo */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1)!important;
+}
+    .stack-item {
+      position: absolute;
+      background-color: black;
+      border: 1px solid #e2d9d5;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 250px; /* Độ rộng của item */
+      height: 100px; /* Độ cao của item */
+      padding: 20px;
+      transition: transform 0.3s;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: rgb(255, 136, 75);
+      font-size: 18px;
+    }
+
+    .stack-item:active {
+      cursor: grabbing;
+    }
+  </style>
+</html>
